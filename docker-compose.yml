@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  postgres-lib:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "VORONETSKAYA_203"
+      POSTGRES_USER: "VORONETSKAYA_203"
+      POSTGRES_PASSWORD: "VORONETSKAYA_203"
+      PGDATA: "/var/lib/postgresql/data/data"
+    volumes:
+      - ./docker/db/scripts/library:/docker-entrypoint-initdb.d
+      - ./docker/db/data/library:/var/lib/postgresql/data
+      - ./docker/db/config/library/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    ports:
+      - "5432:5432"
+  postgres-hospital:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "VORONETSKAYA_203"
+      POSTGRES_USER: "VORONETSKAYA_203"
+      POSTGRES_PASSWORD: "VORONETSKAYA_203"
+      PGDATA: "/var/lib/postgresql/data/data"
+    volumes:
+      - ./docker/db/scripts/hospital:/docker-entrypoint-initdb.d
+      - ./docker/db/data/hospital:/var/lib/postgresql/data
+      - ./docker/db/config/hospital/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    ports:
+      - "5433:5432"
+  postgres-train:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: "VORONETSKAYA_203"
+      POSTGRES_USER: "VORONETSKAYA_203"
+      POSTGRES_PASSWORD: "VORONETSKAYA_203"
+      PGDATA: "/var/lib/postgresql/data/data"
+    volumes:
+      - ./docker/db/scripts/train:/docker-entrypoint-initdb.d
+      - ./docker/db/data/train:/var/lib/postgresql/data
+      - ./docker/db/config/train/postgresql.conf:/var/lib/postgresql/data/postgresql.conf
+    ports:
+      - "5434:5432"
